@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  resources :inivitations
-  resources :accounts
+  resources :accounts, param: :slug
   resource :session
+  resources :users
   resources :passwords, param: :token
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Routes under account slug
+  resources :accounts, param: :slug, path: "", only: [] do
+    resources :invitations
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

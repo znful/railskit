@@ -4,5 +4,5 @@ class AccountUser < ApplicationRecord
 
   has_many :permissions, dependent: :destroy
 
-  enum role: { owner: 0, admin: 1, member: 2 }, _suffix: true
+  enum :role, { owner: 0, admin: 1, member: 2 }, suffix: true
 end

@@ -1,0 +1,33 @@
+<%= form_with(model: [account, invitation]) do |form| %>
+  <% if invitation.errors.any? %>
+    <div style="color: red">
+      <h2>
+        <%= pluralize(invitation.errors.count, "error") %> prohibited this invitation from being saved:
+      </h2>
+
+      <ul>
+        <% invitation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :account_id, value: account.id, hidden: true %>
+  <div>
+    <%= form.label :account, style: "display: block" %>
+    <%= form.text_field :account, value: account.name, disabled: true %>
+  </div>
+
+  <div>
+    <%= form.label :receiver, style: "display: block" %>
+    <%= form.text_field :receiver %>
+  </div>
+
+  <div>
+    <%= form.label :message, style: "display: block" %>
+    <%= form.textarea :message %>
+  </div>
+
+  <div><%= form.submit %></div>
+<% end %>
