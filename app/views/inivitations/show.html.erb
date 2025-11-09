@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @inivitation %>
+
+<div>
+  <%= link_to "Edit this inivitation", edit_inivitation_path(@inivitation) %> |
+  <%= link_to "Back to inivitations", inivitations_path %>
+
+  <%= button_to "Destroy this inivitation", @inivitation, method: :delete %>
+</div>
