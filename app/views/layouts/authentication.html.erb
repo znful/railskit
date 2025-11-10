@@ -47,9 +47,6 @@
 
   <body>
     <div class="page">
-      <%= render "layouts/sidebar" %>
-      <%= render "layouts/navbar" %>
-
       <div class="page-wrapper">
         <div class="page-header d-print-none">
           <div class="container-fluid">
@@ -60,15 +57,10 @@
                   <%= content_for(:page_subtitle) %>
                 </div>
               </div>
-              <div class="col-auto ms-auto">
-                <div class="btn-list"><%= yield :page_actions %></div>
-              </div>
             </div>
           </div>
         </div>
-        <div class="page-body">
-          <div class="container-fluid"><%= yield %></div>
-        </div>
+        <div class="container-fluid"><%= yield %></div>
       </div>
     </div>
   </body>
