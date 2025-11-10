@@ -2,18 +2,32 @@
 
 <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
 
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %>
-  <br>
+<div class="d-flex flex-column gap-4 justify-content-center align-items-center vh-100">
+  <h1>StarterKit</h1>
+  <div class="card">
+    <div class="card-header">
+      <h2>Sign in to your account</h2>
+    </div>
 
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %>
-  <br>
+    <div class="card-body">
+      <%= form_with url: session_path do |form| %>
+        <div class="mb-3">
+          <%= form.label :email_address, "Email Address", class: "mb-1" %>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "user@starterkit.com", value: params[:email_address], class: "form-control" %>
+        </div>
 
-  <%= form.submit "Sign in" %>
-<% end %>
+        <div class="mb-3">
+          <%= form.label :password, class: "mb-1" %>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Password", maxlength: 72, class: "form-control" %>
+        </div>
 
-<br>
+        <%= form.submit "Sign in", class: "btn btn-primary" %>
+      <% end %>
+    </div>
 
-<%= link_to "Forgot password?", new_password_path %>
-
-<%= link_to "Create an account", new_user_path %>
+    <div class="card-footer d-flex justify-content-between">
+      <%= link_to "Forgot password?", new_password_path %>
+      <%= link_to "Create an account", new_user_path %>
+    </div>
+  </div>
+</div>
