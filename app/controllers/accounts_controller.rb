@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy ]
+  before_action :set_account, only: %i[ edit update destroy ]
   before_action :set_accounts_breadcrumb, except: %i[ index ]
 
   # GET /accounts or /accounts.json
@@ -10,6 +10,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    @account = Account.find_by(slug: params.expect(:slug))
+    add_breadcrumb @account.name
   end
 
   # GET /accounts/new

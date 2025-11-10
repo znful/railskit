@@ -3,9 +3,9 @@
 one:
   user: one
   account: one
-  role: 
+  role: admin
 
 two:
   user: two
   account: two
-  role: 
+  role: member
