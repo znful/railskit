@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  before_action :allow_unauthenticated_access
+  allow_unauthenticated_access
+
   def index
+    render layout: "landing"
   end
 end
