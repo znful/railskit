@@ -1,0 +1,46 @@
+<header class="navbar navbar-expand-md d-print-none">
+  <div class="container-fluid">
+    <%= render "shared/breadcrumbs" %>
+
+    <div class="navbar-nav flex-row order-md-last ms-auto">
+      <li class="nav-item">
+        <div data-controller="theme">
+          <button data-action="click->theme#toggle" class="nav-link">
+            <i data-theme-target="icon" class="ti"></i>
+          </button>
+        </div>
+      </li>
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <div class="dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+            >
+              <i class="ti ti-user me-1 fs-2"></i>
+              <span class="nav-link-title"><%= current_user.username %></span>
+            </a>
+            <div class="dropdown-menu">
+              <div>
+                <%= link_to session_path, data: { turbo_method: :delete }, class: "nav-link" do %>
+                  <span class="nav-link-icon">
+                    <i class="ti ti-login me-1 fs-2"></i>
+                  </span>
+                  <span class="nav-link-title">Logout</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to new_session_path, class: "nav-link" do %>
+            <span class="nav-link-icon">
+              <i class="ti ti-login-2 me-1 fs-2"></i>
+            </span>
+            <span class="nav-link-title">Login</span>
+          <% end %>
+        <% end %>
+      </li>
+    </div>
+  </div>
+</header>
