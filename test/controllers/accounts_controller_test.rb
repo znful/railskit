@@ -23,7 +23,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
       post accounts_url, params: { account: { name: @account.name, owner_id: @account.owner_id, slug: @account.slug } }
     end
 
-    assert_redirected_to account_url(Account.last)
+    assert_redirected_to account_url(Account.order(:created_at).last)
   end
 
   test "should show account" do
@@ -34,7 +34,8 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     sign_in users(:one)
-    get edit_account_url(@account)
+    p @account
+    get account_settings(@account)
     assert_response :success
   end
 

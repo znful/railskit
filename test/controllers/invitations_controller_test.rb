@@ -1,6 +1,6 @@
 require "test_helper"
 
-class InivitationsControllerTest < ActionDispatch::IntegrationTest
+class InvitationsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @account = accounts(:one)
     @invitation = invitations(:one)
@@ -8,45 +8,50 @@ class InivitationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     sign_in users(:one)
-    get account_inivitations_url(@account)
+    get account_invitations_url(@account)
     assert_response :success
   end
 
   test "should get new" do
     sign_in users(:one)
-    get new_account_inivitation_url(@account)
+    get new_account_invitation_url(@account)
     assert_response :success
   end
 
-  test "should create inivitation" do
+  test "should create invitation" do
     sign_in users(:one)
-    assert_difference("Inivitation.count") do
-      post account_invitations_url(@account), params: { inivitation: { account_id: @inivitation.account_id, message: @inivitation.message, receiver: @inivitation.receiver, sender_id: @inivitation.sender_id, token: @inivitation.token } }
+    assert_difference("Invitation.count") do
+      post account_invitations_url(@account), params: { invitation: { account_id: @invitation.account_id, message: @invitation.message, receiver: @invitation.receiver, sender_id: @invitation.sender_id, token: @invitation.token } }
     end
 
-    assert_redirected_to accounts_inivitation_url(accountsInivitation.last)
+    assert_redirected_to accounts_invitations_url(@account, Invitation.last)
   end
 
   test "should show inivitation" do
-    get account_inivitation_url(@account, @inivitation)
+    sign_in users(:one)
+    get account_invitation_url(@account, @invitation)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_account_inivitation_url(@account, @inivitation)
+    sign_in users(:one)
+    get edit_account_invitation_url(@account, @invitation)
     assert_response :success
   end
 
   test "should update inivitation" do
-    patch account_inivitation_url(@account, @inivitation), params: { inivitation: { account_id: @inivitation.account_id, message: @inivitation.message, receiver: @inivitation.receiver, sender_id: @inivitation.sender_id, token: @inivitation.token } }
-    assert_redirected_to account_inivitation_url(@account, @inivitation)
+    sign_in users(:one)
+    p @account
+    patch account_invitation_url(@account, @invitation), params: { invitation: { account_id: @invitation.account_id, message: @invitation.message, receiver: @invitation.receiver, sender_id: @invitation.sender_id, token: @invitation.token } }
+    assert_redirected_to account_invitation_url(@account, @invitation)
   end
 
-  test "should destroy inivitation" do
-    assert_difference("Inivitation.count", -1) do
-      delete account_inivitation_url(@account, @inivitation)
+  test "should destroy invitation" do
+    sign_in users(:one)
+    assert_difference("Invitation.count", -1) do
+      delete account_invitation_url(@account, @invitation)
     end
 
-    assert_redirected_to inivitations_url
+    assert_redirected_to invitations_url
   end
 end
