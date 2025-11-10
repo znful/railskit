@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :accounts, param: :slug
   resource :session
   resources :users
   resources :passwords, param: :token
@@ -7,6 +6,11 @@ Rails.application.routes.draw do
   # Routes under account slug
   resources :accounts, param: :slug, path: "", only: [] do
     resources :invitations
+    get "/" => "dashboard#index", as: :dashboard
+    get "settings" => "accounts#edit", as: :settings
+    get "members" => "accounts#members", as: :members
+
+    patch "settings" => "accounts#update"
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -18,5 +22,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "home#index"
 end
