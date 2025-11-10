@@ -1,9 +1,10 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show edit update destroy ]
-  before_action :authenticate_account_access!
+  before_action :set_accounts_breadcrumb, except: %i[ index ]
 
   # GET /accounts or /accounts.json
   def index
+    add_breadcrumb "Accounts"
     @accounts = Account.all
   end
 
@@ -62,6 +63,10 @@ class AccountsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_account
       @account = Account.find_by(slug: params.expect(:account_slug))
+    end
+
+    def set_accounts_breadcrumb
+      add_breadcrumb "Accounts", accounts_path
     end
 
     # Only allow a list of trusted parameters through.
