@@ -21,7 +21,17 @@
     <%# = tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+      href="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler.min.css"
+    >
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js"
+    >
+</script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@$ICONS_VERSION/dist/tabler-icons.min.css"
     >
 
     <link rel="icon" href="/icon.png" type="image/png">
@@ -36,6 +46,24 @@
   </head>
 
   <body>
-    <div class="container"><%= yield %></div>
+    <div class="page">
+      <%= render "layouts/sidebar" %>
+      <%= render "layouts/navbar" %>
+
+      <div class="page-wrapper">
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title"><%= content_for :page_title %></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-body">
+          <div class="container-xl"><%= yield %></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
