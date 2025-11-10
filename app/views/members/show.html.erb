@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @member.username %></td>
+      <td><%= @member.first_name %></td>
+      <td><%= @member.last_name %></td>
+      <td><%= @member.email_address %></td>
+      <td><%= account_user(@account, @member).role.titleize %></td>
+    </tr>
+  </tbody>
+</table>
