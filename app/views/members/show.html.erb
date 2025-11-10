@@ -6,6 +6,7 @@
       <th>Last Name</th>
       <th>Email</th>
       <th>Role</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,13 @@
       <td><%= @member.last_name %></td>
       <td><%= @member.email_address %></td>
       <td><%= account_user(@account, @member).role.titleize %></td>
+      <% if @current_account_user.owner_role? || @current_account_user.admin_role? %>
+        <% unless @member == Current.user %>
+          <td>
+            <%= button_to "Remove User", account_member_path(@account, @member), method: :delete %>
+          </td>
+        <% end %>
+      <% end %>
     </tr>
   </tbody>
 </table>
