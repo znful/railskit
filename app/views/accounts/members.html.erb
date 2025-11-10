@@ -2,7 +2,19 @@
 
 <br>
 
-<% @members.each do |member| %>
-  <%= member.username %>
-  <%= account_user(@account, member).role %>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.username %></td>
+        <td><%= account_user(@account, member).role.titleize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
