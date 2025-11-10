@@ -1,0 +1,8 @@
+<%= @account.name %>
+
+<br>
+
+<% @members.each do |member| %>
+  <%= member.username %>
+  <%= account_user(@account, member).role %>
+<% end %>
