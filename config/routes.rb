@@ -6,9 +6,14 @@ Rails.application.routes.draw do
   # Routes under account slug
   resources :accounts, param: :slug do
     resources :invitations
+    
     get "dashboard" => "dashboard#index", as: :dashboard
     get "settings" => "accounts#edit", as: :settings
-    get "members" => "accounts#members", as: :members
+    patch "settings" => "accounts#update"
+    
+    get "members" => "members#index", as: :members
+    get "members/:id" => "members#show", as: :member
+    delete "members/:id" => "members#destroy"
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

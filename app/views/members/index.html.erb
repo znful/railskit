@@ -1,0 +1,22 @@
+<%= @account.name %>
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td>
+          <%= link_to member.username, account_member_path(@account, member) %>
+        </td>
+        <td><%= account_user(@account, member).role.titleize %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

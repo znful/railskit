@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ edit update destroy ]
+  before_action :set_account, only: %i[ show edit update destroy ]
   before_action :set_accounts_breadcrumb, except: %i[ index ]
 
   # GET /accounts or /accounts.json

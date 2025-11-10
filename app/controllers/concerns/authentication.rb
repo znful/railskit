@@ -49,4 +49,10 @@ module Authentication
       Current.session.destroy
       cookies.delete(:session_id)
     end
+
+    def authenticate_account_access!
+      unless Current.user.accounts.exists?(slug: params[:account_slug])
+        redirect_back fallback_location: root_path, notice: "Silly bloke, you can't do that!"
+      end
+    end
 end
