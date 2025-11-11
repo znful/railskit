@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :set_invitation, only: %i[ show edit update destroy ]
-  before_action :set_account, only: %i[ index show create new edit ]
+  before_action :set_account
 
   # GET /inivitations or /inivitations.json
   def index
@@ -43,7 +43,7 @@ class InvitationsController < ApplicationController
   def update
     respond_to do |format|
       if @invitation.update(invitation_params)
-        format.html { redirect_to @invitation, notice: "Invitation was successfully updated.", status: :see_other }
+        format.html { redirect_to account_invitation_path(@account, @invitation), notice: "Invitation was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @invitation }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class InvitationsController < ApplicationController
     @invitation.destroy!
 
     respond_to do |format|
-      format.html { redirect_to invitations_path, notice: "Invitation was successfully destroyed.", status: :see_other }
+      format.html { redirect_to account_invitations_path(@account), notice: "Invitation was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
   end
