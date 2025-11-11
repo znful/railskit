@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :invitations
 
     get "dashboard" => "dashboard#index", as: :dashboard
+
     get "settings" => "accounts#edit", as: :settings
     patch "settings" => "accounts#update"
 
