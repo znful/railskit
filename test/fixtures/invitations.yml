@@ -4,12 +4,12 @@ one:
   account: one
   token: MyString
   message: MyText
-  receiver: MyString
+  receiver: email@exemple.com
   sender: one
 
 two:
   account: two
-  token: MyString
+  token: MyString2
   message: MyText
-  receiver: MyString
+  receiver: email@exemple.com
   sender: two

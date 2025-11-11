@@ -6,39 +6,46 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
+    sign_in users(:one)
     get accounts_url
     assert_response :success
   end
 
   test "should get new" do
+    sign_in users(:one)
     get new_account_url
     assert_response :success
   end
 
   test "should create account" do
+    sign_in users(:one)
     assert_difference("Account.count") do
-      post accounts_url, params: { account: { name: @account.name, owner_id: @account.owner_id, slug: @account.slug } }
+      post accounts_url, params: { account: { name: @account.name, owner_id: @account.owner_id, slug: SecureRandom.hex(8) } }
     end
 
-    assert_redirected_to account_url(Account.last)
+    assert_redirected_to account_url(Account.order(:created_at).last)
   end
 
   test "should show account" do
+    sign_in users(:one)
     get account_url(@account)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_account_url(@account)
+    sign_in users(:one)
+    get account_settings_url(@account)
     assert_response :success
   end
 
   test "should update account" do
+    sign_in users(:one)
     patch account_url(@account), params: { account: { name: @account.name, owner_id: @account.owner_id, slug: @account.slug } }
     assert_redirected_to account_url(@account)
   end
 
   test "should destroy account" do
+    sign_in users(:one)
     assert_difference("Account.count", -1) do
       delete account_url(@account)
     end

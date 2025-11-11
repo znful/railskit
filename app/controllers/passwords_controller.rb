@@ -16,6 +16,7 @@ class PasswordsController < ApplicationController
   end
 
   def edit
+    render layout: "authentication"
   end
 
   def update

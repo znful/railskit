@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy ]
+  before_action :set_account, only: %i[ edit ]
   before_action :set_accounts_breadcrumb, except: %i[ index ]
 
   # GET /accounts or /accounts.json
@@ -10,6 +10,8 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    @account = Account.find_by(slug: params.expect(:slug))
+    add_breadcrumb @account.name
   end
 
   # GET /accounts/new
@@ -38,6 +40,7 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1 or /accounts/1.json
   def update
+    @account = Account.find_by(slug: params.expect(:slug))
     respond_to do |format|
       if @account.update(account_params)
         format.html { redirect_to @account, notice: "Account was successfully updated.", status: :see_other }
@@ -51,6 +54,7 @@ class AccountsController < ApplicationController
 
   # DELETE /accounts/1 or /accounts/1.json
   def destroy
+    @account = Account.find_by(slug: params.expect(:slug))
     @account.destroy!
 
     respond_to do |format|
