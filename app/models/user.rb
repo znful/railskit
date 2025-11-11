@@ -19,5 +19,6 @@ class User < ApplicationRecord
       account = Account.create!(name: self.first_name, slug: "#{SecureRandom.hex(8)}", owner: self)
       AccountUser.create!(user: self, account: account, role: :owner)
     end
+    self.default_account = self.accounts.first
   end
 end
