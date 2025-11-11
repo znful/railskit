@@ -21,10 +21,10 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
   test "should create invitation" do
     sign_in users(:one)
     assert_difference("Invitation.count") do
-      post account_invitations_url(@account), params: { invitation: { account_id: @invitation.account_id, message: @invitation.message, receiver: @invitation.receiver, sender_id: @invitation.sender_id, token: @invitation.token } }
+      post account_invitations_url(@account), params: { invitation: { account_id: @invitation.account_id, message: @invitation.message, receiver: @invitation.receiver, token: SecureRandom.hex(4) } }
     end
 
-    assert_redirected_to accounts_invitations_url(@account, Invitation.last)
+    assert_redirected_to account_invitation_url(@account, Invitation.order(:created_at).last)
   end
 
   test "should show inivitation" do
@@ -39,10 +39,9 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update inivitation" do
+  test "should update invitation" do
     sign_in users(:one)
-    p @account
-    patch account_invitation_url(@account, @invitation), params: { invitation: { account_id: @invitation.account_id, message: @invitation.message, receiver: @invitation.receiver, sender_id: @invitation.sender_id, token: @invitation.token } }
+    patch account_invitation_url(@account, @invitation), params: { invitation: { account_id: @account.id, message: @invitation.message, receiver: @invitation.receiver } }
     assert_redirected_to account_invitation_url(@account, @invitation)
   end
 
@@ -52,6 +51,6 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
       delete account_invitation_url(@account, @invitation)
     end
 
-    assert_redirected_to invitations_url
+    assert_redirected_to account_invitations_url(@account)
   end
 end

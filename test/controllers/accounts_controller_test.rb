@@ -20,7 +20,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   test "should create account" do
     sign_in users(:one)
     assert_difference("Account.count") do
-      post accounts_url, params: { account: { name: @account.name, owner_id: @account.owner_id, slug: @account.slug } }
+      post accounts_url, params: { account: { name: @account.name, owner_id: @account.owner_id, slug: SecureRandom.hex(8) } }
     end
 
     assert_redirected_to account_url(Account.order(:created_at).last)
@@ -34,8 +34,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     sign_in users(:one)
-    p @account
-    get account_settings(@account)
+    get account_settings_url(@account)
     assert_response :success
   end
 
