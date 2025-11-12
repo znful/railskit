@@ -14,19 +14,19 @@ class MembersController < ApplicationController
 
   def destroy
     unless @current_account_user.owner_role? || @current_account_user.admin_role?
-      redirect_to account_member_path(@account, @member)
+      redirect_to account_member_path(@account, @member), alert: "You are not authorized to remove members"
       return
     end
 
     account_user = @account.account_users.find_by(user: @member)
 
     if account_user.nil?
-      redirect_to account_member_path(@account, @member)
+      redirect_to account_member_path(@account, @member), alert: "Member not found"
       return
     end
 
     account_user.destroy
-    redirect_to account_members_path(@account)
+    redirect_to account_members_path(@account), alert: "Member successfully removed"
   end
 
   private
