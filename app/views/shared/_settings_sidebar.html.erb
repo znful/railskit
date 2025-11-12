@@ -1,0 +1,14 @@
+<ul class="nav nav-pills flex-column">
+  <li class="nav-item">
+    <%= link_to account_settings_path(default_account), class: ["nav-link", "active": current_page?(account_settings_path(default_account))] do %>
+      <span class="ti ti-settings me-2"></span>
+      <span>General</span>
+    <% end %>
+  </li>
+  <li class="nav-item">
+    <%= link_to account_members_path(default_account), class: ["nav-link", "active": current_page?(account_members_path(default_account))] do %>
+      <span class="ti ti-user me-2"></span>
+      <span>Members</span>
+    <% end %>
+  </li>
+</ul>

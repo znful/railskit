@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_10_105743) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_11_230350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -108,12 +108,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_105743) do
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "default_account_id"
     t.string "email_address", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
     t.string "username", null: false
+    t.index ["default_account_id"], name: "index_users_on_default_account_id"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
@@ -125,4 +127,5 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_10_105743) do
   add_foreign_key "invitations", "accounts"
   add_foreign_key "invitations", "users", column: "sender_id"
   add_foreign_key "sessions", "users"
+  add_foreign_key "users", "accounts", column: "default_account_id"
 end

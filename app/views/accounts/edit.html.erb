@@ -1,12 +1,11 @@
 <% content_for :title, "Editing account" %>
 
-<h1>Editing account</h1>
+<% content_for :page_title do %>
+  <h1 class="mb-0">Editing account</h1>
+<% end %>
 
-<%= render "form", account: @account %>
+<% content_for :page_subtitle do %>
+  <span>Settings</span>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Show this account", @account %> |
-  <%= link_to "Back to accounts", accounts_path %>
-</div>
+<div><%= render "form", account: @account %></div>
