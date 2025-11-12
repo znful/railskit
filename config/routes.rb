@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get "members" => "members#index", as: :members
     get "members/:id" => "members#show", as: :member
     delete "members/:id" => "members#destroy"
+    patch "members/:id" => "members#update"
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

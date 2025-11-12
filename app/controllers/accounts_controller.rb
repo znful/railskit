@@ -66,7 +66,7 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find_by(slug: params.expect(:account_slug))
+      @account = Account.find_by(slug: params.expect(:slug))
     end
 
     def set_accounts_breadcrumb
