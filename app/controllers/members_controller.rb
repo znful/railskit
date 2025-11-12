@@ -13,6 +13,9 @@ class MembersController < ApplicationController
   end
 
   def show
+    add_breadcrumb "Members", account_members_path(@account)
+    add_breadcrumb @member.username
+    render layout: "settings"
   end
 
   def destroy
