@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
   before_action :authenticate_account_access!
   before_action :set_account
-  before_action :set_member, only: %i[ show destroy ]
+  before_action :set_member, only: %i[ show destroy update ]
+  before_action :set_member_account_user, only: %i[ show destroy update edit ]
   before_action :set_current_account_user
 
 
@@ -12,14 +13,43 @@ class MembersController < ApplicationController
   def show
   end
 
-  def destroy
+  def edit
+  end
+
+  def update
     unless @current_account_user.owner_role? || @current_account_user.admin_role?
-      redirect_to account_member_path(@account, @member)
+      redirect_to account_member_path(@account, @member), alert: "You are not authorized to edit members"
       return
     end
 
-    @member.destroy
-    redirect_to account_members_path(@account)
+    if @member_account_user.nil?
+      redirect_to account_member_path(@account, @member), alert: "Member not found"
+      return
+    end
+
+    @member_account_user.update(role: params[:role])
+    redirect_to account_member_path(@account, @member), alert: "Member successfully updated"
+  end
+
+
+  def destroy
+    if @member_account_user.nil?
+      redirect_to account_member_path(@account, @member), alert: "Member not found"
+      return
+    end
+
+    if @member == Current.user
+      @member_account_user.destroy
+      redirect_to accounts_path, alert: "Successfully left account"
+    else
+      unless @current_account_user.owner_role? || @current_account_user.admin_role?
+        redirect_to account_member_path(@account, @member), alert: "You are not authorized to remove members"
+        return
+      end
+
+      @member_account_user.destroy
+      redirect_to account_members_path(@account), alert: "Member successfully removed"
+    end
   end
 
   private
@@ -32,7 +62,11 @@ class MembersController < ApplicationController
     @member = @account.account_users.find_by!(user_id: params[:id]).user
   end
 
+  def set_member_account_user
+    @member_account_user = @account.account_users.find_by!(user: @member)
+  end
+
   def set_current_account_user
-    @current_account_user = AccountUser.find_by(account: @account, user: Current.user)
+    @current_account_user = AccountUser.find_by!(account: @account, user: Current.user)
   end
 end
