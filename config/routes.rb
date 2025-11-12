@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   # Routes under account slug
   resources :accounts, param: :slug do
     resources :invitations
-
     get "dashboard" => "dashboard#index", as: :dashboard
     get "settings" => "accounts#edit", as: :settings
     patch "settings" => "accounts#update"

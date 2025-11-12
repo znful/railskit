@@ -12,6 +12,7 @@ class AccountsController < ApplicationController
   def show
     @account = Account.find_by(slug: params.expect(:slug))
     add_breadcrumb @account.name
+    render layout: "settings"
   end
 
   # GET /accounts/new
@@ -21,6 +22,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+    render layout: "settings"
   end
 
   # POST /accounts or /accounts.json
