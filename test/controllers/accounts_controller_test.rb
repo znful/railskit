@@ -34,7 +34,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get edit" do
     sign_in users(:one)
-    get account_settings_url(@account)
+    get account_settings_url(@account), params: { slug: @account.slug }
     assert_response :success
   end
 
