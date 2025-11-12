@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ edit ]
-  before_action :set_accounts_breadcrumb, except: %i[ index ]
+  before_action :set_accounts_breadcrumb, except: %i[ index edit ]
 
   # GET /accounts or /accounts.json
   def index

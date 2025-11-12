@@ -3,10 +3,13 @@ class MembersController < ApplicationController
   before_action :set_account
   before_action :set_member, only: %i[ show destroy ]
   before_action :set_current_account_user
+  before_action :set_members_breadcrumbs
 
 
   def index
+    add_breadcrumb "Members"
     @members = @account.users
+    render layout: "settings"
   end
 
   def show
@@ -34,5 +37,9 @@ class MembersController < ApplicationController
 
   def set_current_account_user
     @current_account_user = AccountUser.find_by(account: @account, user: Current.user)
+  end
+
+  def set_members_breadcrumbs
+    add_breadcrumb @account.name, account_settings_path(@account)
   end
 end

@@ -1,7 +1,11 @@
 <% content_for :title, "Editing account" %>
 
 <% content_for :page_title do %>
-  <h1>Editing account</h1>
+  <h1 class="mb-0">Editing account</h1>
+<% end %>
+
+<% content_for :page_subtitle do %>
+  <span>Settings</span>
 <% end %>
 
 <div><%= render "form", account: @account %></div>
