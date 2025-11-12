@@ -18,7 +18,14 @@ class MembersController < ApplicationController
       return
     end
 
-    @member.destroy
+    account_user = @account.account_users.find_by(user: @member)
+
+    if account_user.nil?
+      redirect_to account_member_path(@account, @member)
+      return
+    end
+
+    account_user.destroy
     redirect_to account_members_path(@account)
   end
 
