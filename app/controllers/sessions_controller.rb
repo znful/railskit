@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
   private
 
   def redirect_if_logged_in
-    redirect_to account_dashboard_path(Current.user.default_account) if authenticated?
+    redirect_to account_dashboard_path(Current.account) if authenticated?
   end
 end
