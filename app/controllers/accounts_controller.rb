@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ edit ]
+  before_action :set_account, only: %i[ show edit update destroy ]
   before_action :set_accounts_breadcrumb, except: %i[ index edit ]
 
   # GET /accounts or /accounts.json
@@ -10,7 +10,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
-    @account = Account.find_by(slug: params.expect(:slug))
     add_breadcrumb @account.name
     render layout: "settings"
   end
@@ -43,7 +42,6 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1 or /accounts/1.json
   def update
-    @account = Account.find_by(slug: params.expect(:slug))
     respond_to do |format|
       if @account.update(account_params)
         format.html { redirect_to @account, notice: "Account was successfully updated.", status: :see_other }
@@ -57,7 +55,6 @@ class AccountsController < ApplicationController
 
   # DELETE /accounts/1 or /accounts/1.json
   def destroy
-    @account = Account.find_by(slug: params.expect(:slug))
     @account.destroy!
 
     respond_to do |format|
@@ -69,7 +66,8 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find_by(slug: params.expect(:account_slug))
+      slug = params.expect(:slug)|| params.expect(:account_slug)
+      @account = Account.find_by(slug: slug)
     end
 
     def set_accounts_breadcrumb
@@ -78,6 +76,6 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.expect(account: [ :name, :slug, :owner_id ])
+      params.expect(account: [ :name, :slug, :owner_id, :account_slug ])
     end
 end
