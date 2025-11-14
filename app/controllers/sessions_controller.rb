@@ -21,6 +21,8 @@ class SessionsController < ApplicationController
     redirect_to new_session_path, status: :see_other
   end
 
+  private
+
   def redirect_if_logged_in
     redirect_to account_dashboard_path(Current.user.default_account) if authenticated?
   end
