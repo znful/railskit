@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     get "settings" => "accounts#edit", as: :settings
     patch "settings" => "accounts#update"
 
+    get "update-current" => "accounts#update_current_account", as: "update_current"
+
     get "members" => "members#index", as: :members
     get "members/:id" => "members#show", as: :member
     delete "members/:id" => "members#destroy"
