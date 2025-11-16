@@ -6,6 +6,7 @@ one:
   last_name: User
   email_address: one@example.com
   password_digest: <%= password_digest %>
+  default_account: one
 
 two:
   username: two
@@ -13,3 +14,4 @@ two:
   last_name: User
   email_address: two@example.com
   password_digest: <%= password_digest %>
+  default_account: two

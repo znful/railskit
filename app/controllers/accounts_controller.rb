@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show edit update destroy ]
-  before_action :set_accounts_breadcrumb, except: %i[ index edit ]
+  before_action :set_accounts_breadcrumb, except: %i[ index edit update_current_account ]
 
   # GET /accounts or /accounts.json
   def index
@@ -28,6 +28,7 @@ class AccountsController < ApplicationController
   # POST /accounts or /accounts.json
   def create
     @account = Account.new(account_params)
+    @account.owner = Current.user
 
     respond_to do |format|
       if @account.save
@@ -63,10 +64,17 @@ class AccountsController < ApplicationController
     end
   end
 
+  def update_current_account
+    @account = Account.find_by(slug: params.expect(:account_slug))
+    Current.session.update(account: @account)
+
+    redirect_to account_dashboard_path(@account), notice: "Switched to #{@account.name}"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      slug = params.expect(:slug)|| params.expect(:account_slug)
+      slug = params[:slug] || params[:account_slug]
       @account = Account.find_by(slug: slug)
     end
 

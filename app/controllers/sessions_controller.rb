@@ -21,7 +21,18 @@ class SessionsController < ApplicationController
     redirect_to new_session_path, status: :see_other
   end
 
+  def update_current_account
+    account = Account.find(params.expect(:account_id))
+    session = Current.session
+    if session.update(account: account)
+      redirect_to account_dashboard_path(account), notice: "Switched to #{account.name}"
+    else
+    end
+  end
+
+  private
+
   def redirect_if_logged_in
-    redirect_to account_dashboard_path(Current.user.default_account) if authenticated?
+    redirect_to account_dashboard_path(Current.account) if authenticated?
   end
 end
