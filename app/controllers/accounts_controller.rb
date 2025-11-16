@@ -68,7 +68,7 @@ class AccountsController < ApplicationController
     @account = Account.find_by(slug: params.expect(:account_slug))
     Current.session.update(account: @account)
 
-    redirect_to account_dashboard_path(@account, notice: "Switched to #{@account.name}")
+    redirect_to account_dashboard_path(@account), notice: "Switched to #{@account.name}"
   end
 
   private

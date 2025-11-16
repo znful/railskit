@@ -1,7 +1,15 @@
-<%= form_with url: update_current_account_path, method: :patch, data: { controller: :form, form_target: :form, action: "change->form#submit" } do |form| %>
-  <select id="account" name="account[slug]" class="form-select">
-    <% for account in current_user_accounts %>
-      <option value="<%= account.slug %>"><%= account.name %></option>
-    <% end %>
-  </select>
-<% end %>
+<div data-controller="selector">
+  <%= form_with url: update_current_account_path, method: :patch, data: { selector_target: :form } do |form| %>
+    <select id="account" name="account_slug" class="form-select">
+      <% for account in current_user_accounts %>
+        <option
+          value="<%= account.slug %>"
+          data-action="click->selector#submit"
+          <%= 'selected="selected"' if current_account.id == account.id %>
+        >
+          <%= account.name %>
+        </option>
+      <% end %>
+    </select>
+  <% end %>
+</div>
