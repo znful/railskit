@@ -8,6 +8,7 @@ class Account < ApplicationRecord
   validates :slug, presence: true, uniqueness: true
 
   after_create :link_owner
+  before_destroy :unlink_users
 
   def to_param
     slug
@@ -20,6 +21,13 @@ class Account < ApplicationRecord
 
     Account.transaction do
       AccountUser.create!(user: self.owner, account: self, role: :owner)
+    end
+  end
+
+  def unlink_users
+    linked_users = User.where(default_account: self)
+    linked_users.each do |user|
+      user.update!(default_account: user.accounts.first || nil)
     end
   end
 end
