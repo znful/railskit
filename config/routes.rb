@@ -11,14 +11,13 @@ Rails.application.routes.draw do
     get "settings" => "accounts#edit", as: :settings
     patch "settings" => "accounts#update"
 
-    get "update-current" => "accounts#update_current_account", as: "update_current"
 
     get "members" => "members#index", as: :members
     get "members/:id" => "members#show", as: :member
     delete "members/:id" => "members#destroy"
     patch "members/:id" => "members#update"
   end
-
+  patch "update-current" => "accounts#update_current_account", as: "update_current_account"
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

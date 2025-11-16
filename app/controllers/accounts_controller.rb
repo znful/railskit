@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: %i[ show edit update destroy ]
-  before_action :set_accounts_breadcrumb, except: %i[ index edit ]
+  before_action :set_accounts_breadcrumb, except: %i[ index edit update_current_account ]
 
   # GET /accounts or /accounts.json
   def index
@@ -64,6 +64,7 @@ class AccountsController < ApplicationController
   end
 
   def update_current_account
+    @account = Account.find_by(slug: params.expect(:account_slug))
     Current.session.update(account: @account)
 
     redirect_to account_dashboard_path(@account, notice: "Switched to #{@account.name}")
