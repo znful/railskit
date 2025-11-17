@@ -1,5 +1,7 @@
 <% content_for :title, @member.username %>
 
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
 <% content_for :page_title do %>
   <h1 class="mb-0"><%= @member.username %></h1>
 <% end %>
@@ -43,13 +45,13 @@
                     <p class="dropdown-item active"><%= label %></p>
                   <% elsif role == "owner" && !@current_account_user.owner_role? %>
                   <% else %>
-                    <%= link_to label, account_member_path(@account, @member, role: role), method: :patch, class: "dropdown-item" %>
+                    <%= button_to label, account_member_path(@account, @member, role: role), method: :patch, class: "dropdown-item" %>
                   <% end %>
                 <% end %>
 
                 <% unless @member == current_user %>
                   <p class="dropdown-header">Remove User</p>
-                  <%= link_to "Remove User", account_member_path(@account, @member), method: :delete, class: "dropdown-item" %>
+                  <%= button_to "Remove User", account_member_path(@account, @member), method: :delete, class: "dropdown-item" %>
                 <% end %>
               </div>
             </div>

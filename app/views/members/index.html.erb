@@ -1,5 +1,7 @@
 <% content_for :title, "Members" %>
 
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
 <% content_for :page_title do %>
   <h1 class="mb-0"><%= @account.name %></h1>
 <% end %>
