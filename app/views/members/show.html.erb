@@ -1,52 +1,64 @@
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <% if can_edit_member?(@member, @member_account_user, @current_account_user) %>
-        <th>Actions</th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @member.username %></td>
-      <td><%= @member.first_name %></td>
-      <td><%= @member.last_name %></td>
-      <td><%= @member.email_address %></td>
-      <td><%= @member_account_user.role.titleize %></td>
-      <td>
+<% content_for :title, @member.username %>
+
+<% content_for :page_title do %>
+  <h1 class="mb-0"><%= @member.username %></h1>
+<% end %>
+
+<% content_for :page_subtitle do %>
+  <%= @account.name %>
+<% end %>
+
+<div>
+  <table class="table table-vcenter">
+    <thead class="sticky-top">
+      <tr>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Role</th>
         <% if can_edit_member?(@member, @member_account_user, @current_account_user) %>
-          <div class="dropdown">
-            <a href="#" class="btn" data-bs-toggle="dropdown">
-              <p>Edit Member</p>
-            </a>
-            <div class="dropdown-menu">
-              <p class="dropdown-header">Edit Role</p>
-
-              <% role_options.each do |label, role| %>
-                <% if role == @member_account_user.role %>
-                  <p class="dropdown-item active"><%= label %></p>
-                <% elsif role == "owner" && !@current_account_user.owner_role? %>
-                <% else %>
-                  <%= button_to label, account_member_path(@account, @member, role: role), method: :patch, class: "dropdown-item" %>
-                <% end %>
-              <% end %>
-
-              <% unless @member == current_user %>
-                <p class="dropdown-header">Remove User</p>
-                <%= button_to "Remove User", account_member_path(@account, @member), method: :delete, class: "dropdown-item" %>
-              <% end %>
-            </div>
-          </div>
+          <th>Actions</th>
         <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @member.username %></td>
+        <td><%= @member.first_name %></td>
+        <td><%= @member.last_name %></td>
+        <td><%= @member.email_address %></td>
+        <td><%= @member_account_user.role.titleize %></td>
+        <td>
+          <% if can_edit_member?(@member, @member_account_user, @current_account_user) %>
+            <div class="dropdown">
+              <button class="btn" data-bs-toggle="dropdown">
+                <span class="dropdown-toggle">Edit Member</span>
+              </button>
+              <div class="dropdown-menu">
+                <p class="dropdown-header">Edit Role</p>
+
+                <% role_options.each do |label, role| %>
+                  <% if role == @member_account_user.role %>
+                    <p class="dropdown-item active"><%= label %></p>
+                  <% elsif role == "owner" && !@current_account_user.owner_role? %>
+                  <% else %>
+                    <%= link_to label, account_member_path(@account, @member, role: role), method: :patch, class: "dropdown-item" %>
+                  <% end %>
+                <% end %>
+
+                <% unless @member == current_user %>
+                  <p class="dropdown-header">Remove User</p>
+                  <%= link_to "Remove User", account_member_path(@account, @member), method: :delete, class: "dropdown-item" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <% if @member == current_user && !@member_account_user.owner_role? %>
   <%= button_to "Leave Account", account_member_path(@account, @member), method: :delete, class: "btn" %>
