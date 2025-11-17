@@ -4,20 +4,24 @@ class InvitationsController < ApplicationController
 
   # GET /inivitations or /inivitations.json
   def index
-    @invitations = Invitation.all
+    @invitations = Current.account.invitations
+    render layout: "settings"
   end
 
   # GET /inivitations/1 or /inivitations/1.json
   def show
+    render layout: "settings"
   end
 
   # GET /inivitations/new
   def new
     @invitation = Invitation.new
+    render layout: "settings"
   end
 
   # GET /inivitations/1/edit
   def edit
+    render layout: "settings"
   end
 
   # POST /inivitations or /inivitations.json
@@ -33,7 +37,7 @@ class InvitationsController < ApplicationController
         format.html { redirect_to [ @account, @invitation ], notice: "Invitation was successfully created." }
         format.json { render :show, status: :created, location: @invitation }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity, layout: "settings" }
         format.json { render json: @invtation.errors, status: :unprocessable_entity }
       end
     end
