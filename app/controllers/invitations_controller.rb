@@ -1,26 +1,32 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: %i[ show edit update destroy ]
   before_action :set_account
+  before_action :set_invitation, only: %i[ show edit update destroy ]
+  before_action :set_account_breadcrumb
+  before_action :set_invitation_breadcrumbs, except: %i[ index ]
 
   # GET /inivitations or /inivitations.json
   def index
+    add_breadcrumb "Invitations"
     @invitations = Current.account.invitations
     render layout: "settings"
   end
 
   # GET /inivitations/1 or /inivitations/1.json
   def show
+    add_breadcrumb "Detail"
     render layout: "settings"
   end
 
   # GET /inivitations/new
   def new
+    add_breadcrumb "New invitation"
     @invitation = Invitation.new
     render layout: "settings"
   end
 
   # GET /inivitations/1/edit
   def edit
+    add_breadcrumb "Edit invitation"
     render layout: "settings"
   end
 
@@ -74,6 +80,14 @@ class InvitationsController < ApplicationController
 
     def set_account
       @account = Account.find_by!(slug: params.expect(:account_slug))
+    end
+
+    def set_account_breadcrumb
+      add_breadcrumb @account.name, account_settings_path(@account)
+    end
+
+    def set_invitation_breadcrumbs
+      add_breadcrumb "Invitations", account_invitations_path(@account)
     end
 
     # Only allow a list of trusted parameters through.

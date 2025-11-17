@@ -1,8 +1,9 @@
-<%= form_with(model: [account, invitation]) do |form| %>
+<%= form_with(model: [account, invitation], class: "w-100") do |form| %>
   <% if invitation.errors.any? %>
     <div style="color: red">
       <h2>
-        <%= pluralize(invitation.errors.count, "error") %> prohibited this invitation from being saved:
+        <%= pluralize(invitation.errors.count, "error") %> prohibited this
+        invitation from being saved:
       </h2>
 
       <ul>
@@ -13,21 +14,23 @@
     </div>
   <% end %>
 
-  <%= form.text_field :account_id, value: account.id, hidden: true %>
-  <div>
-    <%= form.label :account, style: "display: block" %>
-    <%= form.text_field :account, value: account.name, disabled: true %>
-  </div>
+  <div class="d-flex flex-column gap-4 w-100">
+    <%= form.text_field :account_id, value: account.id, hidden: true %>
+    <div>
+      <%= form.label :account, class: "form-label" %>
+      <%= form.text_field :account, value: account.name, disabled: true, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :receiver, style: "display: block" %>
-    <%= form.text_field :receiver %>
-  </div>
+    <div>
+      <%= form.label :receiver, class: "form-label" %>
+      <%= form.text_field :receiver, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :message, style: "display: block" %>
-    <%= form.textarea :message %>
-  </div>
+    <div>
+      <%= form.label :message, class: "form-label" %>
+      <%= form.rich_textarea :message, class: "form-control", style: "min-height: 25vh;" %>
+    </div>
 
-  <div><%= form.submit %></div>
+    <div><%= form.submit class: "btn btn-primary" %></div>
+  </div>
 <% end %>
