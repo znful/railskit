@@ -32,6 +32,7 @@ class InvitationsController < ApplicationController
 
   # POST /inivitations or /inivitations.json
   def create
+    add_breadcrumb "New invitation"
     @invitation = Invitation.new(invitation_params)
     @invitation.account = @account
     @invitation.token = SecureRandom.hex(10)
