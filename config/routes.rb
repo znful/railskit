@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :join_invitations, only: %i[ index create ], as: :join_accounts, path: "join"
   resource :session
   resources :users
   resources :passwords, param: :token
