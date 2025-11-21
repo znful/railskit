@@ -1,0 +1,26 @@
+<div>
+  <table class="table table-hover">
+    <thead class="sticky-top">
+      <tr>
+        <th>Sender</th>
+        <th>Receiver</th>
+        <th>Created at</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% invitations.each do |invitation| %>
+        <tr class="align-middle">
+          <td><%= invitation.sender.username %></td>
+          <td><%= invitation.receiver %></td>
+          <td><%= invitation.created_at.strftime("%F") %></td>
+          <td class="d-flex gap-2">
+            <%= link_to "Show", [@account, invitation], class: "btn btn-primary" %>
+            <%= link_to "Edit", edit_account_invitation_path(@account, invitation), class: "btn btn-secondary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

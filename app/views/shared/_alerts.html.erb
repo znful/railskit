@@ -1,0 +1,15 @@
+<% flash.each do |key, value| %>
+  <div
+    class="<%= flash_class(key) %> alerts-dismissible show fade align-items-center"
+    role="alert"
+  >
+    <div class="alert-icon justify-items-center">
+      <span class="<%= flash_icon(key) %>"></span>
+    </div>
+
+    <div>
+      <div class="alert-heading mb-0"><%= value %></div>
+    </div>
+    <a class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></a>
+  </div>
+<% end %>

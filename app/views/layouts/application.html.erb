@@ -51,7 +51,7 @@
       <%= render "shared/navbar" %>
 
       <div class="page-wrapper">
-        <div class="page-header d-print-none">
+        <div class="page-header d-print-none border-bottom mt-3 pb-3">
           <div class="container-fluid">
             <div class="row g-2 align-items-center">
               <div class="col">
@@ -66,8 +66,12 @@
             </div>
           </div>
         </div>
+
         <div class="page-body">
-          <div class="container-fluid"><%= yield %></div>
+          <div class="container-fluid">
+            <%= render "shared/alerts" %>
+            <%= yield %>
+          </div>
         </div>
       </div>
     </div>

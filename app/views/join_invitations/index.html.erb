@@ -1,0 +1,12 @@
+<%= content_for :page_title do %>
+  <h1>Join <%= @invitation.account.name %></h1>
+<% end %>
+
+<div>
+  <strong><%= @invitation.sender.username %></strong> invited you to join
+  <%= @invitation.account.name %>
+</div>
+
+<div>
+  <%= button_to "Join #{@invitation.account.name}", join_accounts_path(token: @invitation.token), data: { turbo_method: :post } %>
+</div>
