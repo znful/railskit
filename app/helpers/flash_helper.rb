@@ -14,8 +14,8 @@ module FlashHelper
     when :notice then "ti ti-info-circle"
     when :success then "ti ti-check"
     when :error then "ti ti-alert-triangle"
-    when :alert then "ti ti-alert-cricle"
-    when :warning then "ti ti-alert-cricle"
+    when :alert then "ti ti-alert-circle"
+    when :warning then "ti ti-alert-circle"
     end
   end
 end

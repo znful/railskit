@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
+  add_flash_types :warning
+  add_flash_types :success
+  add_flash_types :error
+
 
   def add_breadcrumb(label, path = "")
     @breadcrumbs << { label: label, path: path }
