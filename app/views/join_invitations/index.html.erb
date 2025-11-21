@@ -8,5 +8,5 @@
 </div>
 
 <div>
-  <%= link_to "Join #{@invitation.account.name}", join_accounts_path(@invitation), method: :post %>
+  <%= button_to "Join #{@invitation.account.name}", join_accounts_path(token: @invitation.token), data: { turbo_method: :post } %>
 </div>
