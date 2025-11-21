@@ -1,0 +1,21 @@
+module FlashHelper
+  def flash_class(level)
+    case level.to_sym
+    when :notice then "alert alert-info"
+    when :success then "alert alert-success"
+    when :error then "alert alert-error"
+    when :alert then "alert alert-error"
+    when :warning then "alert alert-warning"
+    end
+  end
+
+  def flash_icon(level)
+    case level.to_sym
+    when :notice then "ti ti-info-circle"
+    when :success then "ti ti-check"
+    when :error then "ti ti-alert-triangle"
+    when :alert then "ti ti-alert-cricle"
+    when :warning then "ti ti-alert-cricle"
+    end
+  end
+end
