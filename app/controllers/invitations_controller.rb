@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
   # GET /inivitations or /inivitations.json
   def index
     add_breadcrumb "Invitations"
-    @invitations = Current.account.invitations
+    @invitations = @account.invitations
     render layout: "settings"
   end
 
