@@ -11,7 +11,7 @@ class JoinInvitationsController < ApplicationController
 
     if account_user.save
       @invitation.destroy!
-      redirect_to account_dashboard_path(@invitation.account), notice: "Successfully joined #{@invitation.account.name}"
+      redirect_to account_dashboard_path(@invitation.account), success: "Successfully joined #{@invitation.account.name}"
     else
       render :new, notice: "Error joining account. Please try again."
     end
@@ -23,7 +23,7 @@ class JoinInvitationsController < ApplicationController
   end
 
   def redirect_members
-    redirect_to account_dashboard_path(@invitation.account), notice: "You are already a member of this account" if AccountUser.where(account: @invitation.account, user: Current.user).exists?
+    redirect_to account_dashboard_path(@invitation.account), success: "You are already a member of this account" if AccountUser.where(account: @invitation.account, user: Current.user).exists?
   end
 
   def redirect_unexpected_user
