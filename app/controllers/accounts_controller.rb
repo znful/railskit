@@ -45,7 +45,7 @@ class AccountsController < ApplicationController
   def update
     respond_to do |format|
       if @account.update(account_params)
-        format.html { redirect_to @account, notice: "Account was successfully updated.", status: :see_other }
+        format.html { redirect_to account_settings_path(@account), success: "Account was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @account }
       else
         format.html { render :edit, status: :unprocessable_entity }
