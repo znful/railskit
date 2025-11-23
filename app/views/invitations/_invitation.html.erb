@@ -1,27 +1,29 @@
 <div id="<%= dom_id invitation %>" class="d-flex flex-column gap-4 w-100">
-  <div>
-    <strong>Account:</strong>
-    <span><%= invitation.account.name %></span>
+  <div class="d-flex flex-row w-100">
+    <span class="form-label col-2 align-self-center my-auto">Account:</span>
+    <input class="form-control" value="<%= invitation.account.name %>" disabled>
   </div>
 
-  <div>
-    <strong>Sender:</strong>
+  <div class="d-flex flex-row">
+    <span class="col-2 align-self-center my-auto">Sender:</span>
 
-    <span>
+    <span class="form-control">
       <%= invitation.sender.username %>
-      (<%= invitation.sender.email_address %>)
+
+      <span class="text-muted fs-5">
+        (<%= invitation.sender.email_address %>)
+      </span>
     </span>
   </div>
 
-  <div><strong>Receiver:</strong><span><%= invitation.receiver %></span></div>
+  <div class="d-flex flex-row">
+    <span class="col-2 align-self-center my-auto">Receiver:</span>
 
-  <div>
-    <strong>Sent at:</strong>
-    <span><%= invitation.created_at.strftime("%B %d, %Y %H:%M") %></span>
+    <span class="form-control"><%= invitation.receiver %></span>
   </div>
 
   <div>
     <strong>Message:</strong>
-    <div class="border p-3 rounded mt-2"><%= invitation.message %></div>
+    <div class="card p-3 rounded mt-2"><%= invitation.message %></div>
   </div>
 </div>
