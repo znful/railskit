@@ -24,7 +24,7 @@ class InvitationsControllerTest < ActionDispatch::IntegrationTest
       post account_invitations_url(@account), params: { invitation: { account_id: @invitation.account_id, message: @invitation.message, receiver: @invitation.receiver, token: SecureRandom.hex(4) } }
     end
 
-    assert_redirected_to account_invitation_url(@account, Invitation.order(:created_at).last)
+    assert_redirected_to account_invitations_url(@account)
   end
 
   test "should show inivitation" do

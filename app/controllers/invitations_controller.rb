@@ -41,7 +41,7 @@ class InvitationsController < ApplicationController
 
     respond_to do |format|
       if @invitation.save
-        format.html { redirect_to [ @account, @invitation ], notice: "Invitation was successfully created." }
+        format.html { redirect_to account_invitations_path(@account), notice: "Invitation was successfully created." }
         format.json { render :show, status: :created, location: @invitation }
       else
         format.html { render :new, status: :unprocessable_entity, layout: "settings" }

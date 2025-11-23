@@ -1,6 +1,12 @@
 <% content_for :title, "New invitation" %>
 
-<h1>New invitation</h1>
+<%= content_for :page_title do %>
+  <h1 class="mb-0">New invitation</h1>
+<% end %>
+
+<%= content_for :page_subtitle do %>
+  <span>Create a new invitation for account "<%= @account.name %>"</span>
+<% end %>
 
 <%= render "form", invitation: @invitation, account: @account %>
 

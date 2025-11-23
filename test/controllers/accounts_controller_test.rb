@@ -32,7 +32,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should get settings" do
     sign_in users(:one)
     get account_settings_url(@account), params: { slug: @account.slug }
     assert_response :success
@@ -41,7 +41,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
   test "should update account" do
     sign_in users(:one)
     patch account_url(@account), params: { account: { name: @account.name, owner_id: @account.owner_id, slug: @account.slug } }
-    assert_redirected_to account_url(@account)
+    assert_redirected_to account_settings_path(@account)
   end
 
   test "should destroy account" do
