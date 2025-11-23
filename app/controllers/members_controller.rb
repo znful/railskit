@@ -34,7 +34,7 @@ class MembersController < ApplicationController
     end
 
     @member_account_user.update(role: params[:role])
-    redirect_to account_member_path(@account, @member), alert: "Member successfully updated"
+    redirect_to account_member_path(@account, @member), success: "Member successfully updated"
   end
 
 
@@ -46,7 +46,7 @@ class MembersController < ApplicationController
 
     if @member == Current.user
       @member_account_user.destroy
-      redirect_to accounts_path, alert: "Successfully left account"
+      redirect_to accounts_path, success: "Successfully left account"
     else
       unless @current_account_user.owner_role? || @current_account_user.admin_role?
         redirect_to account_member_path(@account, @member), alert: "You are not authorized to remove members"
@@ -54,7 +54,7 @@ class MembersController < ApplicationController
       end
 
       @member_account_user.destroy
-      redirect_to account_members_path(@account), alert: "Member successfully removed"
+      redirect_to account_members_path(@account), success: "Member successfully removed"
     end
   end
 
