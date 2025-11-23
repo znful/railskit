@@ -1,11 +1,27 @@
-<div id="<%= dom_id invitation %>">
-  <div><strong>Account:</strong><%= invitation.account_id %></div>
+<div id="<%= dom_id invitation %>" class="d-flex flex-column gap-4 w-100">
+  <div>
+    <strong>Account:</strong>
+    <span><%= invitation.account.name %></span>
+  </div>
 
-  <div><strong>Token:</strong><%= invitation.token %></div>
+  <div>
+    <strong>Sender:</strong>
 
-  <div><strong>Message:</strong><%= invitation.message %></div>
+    <span>
+      <%= invitation.sender.username %>
+      (<%= invitation.sender.email_address %>)
+    </span>
+  </div>
 
-  <div><strong>Receiver:</strong><%= invitation.receiver %></div>
+  <div><strong>Receiver:</strong><span><%= invitation.receiver %></span></div>
 
-  <div><strong>Sender:</strong><%= invitation.sender_id %></div>
+  <div>
+    <strong>Sent at:</strong>
+    <span><%= invitation.created_at.strftime("%B %d, %Y %H:%M") %></span>
+  </div>
+
+  <div>
+    <strong>Message:</strong>
+    <div class="border p-3 rounded mt-2"><%= invitation.message %></div>
+  </div>
 </div>
