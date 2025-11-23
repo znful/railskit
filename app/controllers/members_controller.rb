@@ -33,6 +33,10 @@ class MembersController < ApplicationController
       return
     end
 
+    if params[:role] == "owner" && @current_account_user.owner_role?
+      @current_account_user.update(role: "admin")
+    end
+
     @member_account_user.update(role: params[:role])
     redirect_to account_member_path(@account, @member), success: "Member successfully updated"
   end
